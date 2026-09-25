@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
 from fastapi import FastAPI
 
 from .health.routes import router as health_router
+
+load_dotenv()
 
 app = FastAPI()
 

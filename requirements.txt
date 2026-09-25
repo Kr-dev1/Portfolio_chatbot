@@ -8,3 +8,4 @@ pypdf
 pymupdf
 langchain-tavily
 python-dotenv
+qdrant-client
