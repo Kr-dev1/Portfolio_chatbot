@@ -1,0 +1,28 @@
+[project]
+name = "portfolio-chat"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "kasturirangan", email = "kasturirangan20@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.141.1",
+    "langchain>=1.4.2",
+    "langchain-google-genai>=4.4.0",
+    "langchain-groq>=1.1.3",
+    "langchain-openai>=1.6.6",
+    "langchain-tavily>=0.2.18",
+    "langgraph>=1.2.12",
+    "pymupdf>=1.28.2",
+    "pypdf>=6.19.0",
+    "python-dotenv>=1.2.3",
+]
+
+[project.scripts]
+portfolio-chat = "portfolio_chat:main"
+
+[build-system]
+requires = ["uv_build>=0.12.7,<0.13.0"]
+build-backend = "uv_build"

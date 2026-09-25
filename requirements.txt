@@ -1,0 +1,10 @@
+fastapi[standard]
+langchain
+langgraph
+langchain-openai
+langchain-groq
+langchain-google-genai
+pypdf
+pymupdf
+langchain-tavily
+python-dotenv
