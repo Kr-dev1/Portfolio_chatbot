@@ -8,7 +8,7 @@ from portfolio_chat.api.chat.state import State
 from portfolio_chat.config import (
     GROQ_API_KEY,
 )
-from portfolio_chat.tools.helpers.helper import compression_retriever
+from portfolio_chat.tools.helpers.helper import retriever
 from portfolio_chat.tools.logger.guardrail import guardrail_logger
 
 guard_rail_model = "groq:openai/gpt-oss-safeguard-20b"
@@ -76,7 +76,7 @@ def chat_node(state: State):
         api_key=GROQ_API_KEY,
     )
 
-    context = compression_retriever.invoke(user_input)
+    context = retriever.invoke(user_input)
 
     prompt = f"""
     You are Kasturi's portfolio assistant.

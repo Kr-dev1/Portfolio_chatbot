@@ -17,6 +17,5 @@ unstructured
 unstructured[pdf]
 markdown
 langchain-qdrant
-flashrank
 sqlmodel
 psycopg2-binary
