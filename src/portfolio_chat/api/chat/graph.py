@@ -34,10 +34,3 @@ graph_handler.add_conditional_edges("guardrail", guardrail_router, {
 })
 
 graph =  graph_handler.compile()
-
-for chunk in graph.stream(
-    State(
-        user_input="Tell me about Kasturi's experience with RAG"
-    )
-):
-    print(chunk)
