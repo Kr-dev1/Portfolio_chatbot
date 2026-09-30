@@ -1,3 +1,4 @@
+import time
 from typing import cast
 
 from langchain.chat_models import init_chat_model
@@ -78,6 +79,7 @@ def chat_node(state: State):
 
     context = retriever.invoke(user_input)
 
+
     prompt = f"""
     You are Kasturi's portfolio assistant.
 
@@ -110,9 +112,25 @@ def chat_node(state: State):
     {user_input}
     """
 
+    start = time.perf_counter()
+
+    context = retriever.invoke(user_input)
+
+    print(
+        f"Retrieval: {time.perf_counter() - start:.3f}s"
+    )
+
+    llm_start = time.perf_counter()
+
     resp = llm.invoke(prompt)
 
-    return {"messages": [resp], "context": context, "response": resp.content}
+    print(
+        f"LLM: {time.perf_counter() - llm_start:.3f}s"
+    )
+
+    print(
+        f"Total chat node: {time.perf_counter() - start:.3f}s"
+    )
     # start = time.perf_counter()
     # first_token_time = None
     # usage = None
