@@ -1,5 +1,6 @@
 fastapi[standard]
 langchain
+langchain_community
 langgraph
 langchain-openai
 langchain-groq
@@ -9,3 +10,13 @@ pymupdf
 langchain-tavily
 python-dotenv
 qdrant-client
+langchain-text-splitters
+langchain-unstructured
+Unstructured-client
+unstructured
+unstructured[pdf]
+markdown
+langchain-qdrant
+flashrank
+sqlmodel
+psycopg2-binary
