@@ -131,6 +131,8 @@ def chat_node(state: State):
     print(
         f"Total chat node: {time.perf_counter() - start:.3f}s"
     )
+
+    return {"messages": [resp], "context": context, "response": resp.content}
     # start = time.perf_counter()
     # first_token_time = None
     # usage = None
