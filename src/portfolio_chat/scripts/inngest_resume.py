@@ -30,25 +30,13 @@ def inngest_resume(file_path: Path | str):
         model="gemini-embedding-2-preview", api_key=GEMINI_API_KEY
     )
 
-    vector_store = QdrantVectorStore.from_documents(
+    QdrantVectorStore.from_documents(
         documents=docs,
         embedding=embeddings,
         url=QDRANT_URL,
         api_key=QDRANT_API_KEY,
         collection_name="resume",
     )
-
-    results = vector_store.similarity_search(
-        "What did I do at Meyi cloud?",
-        k=2,
-    )
-
-    for doc in results:
-        print("=" * 80)
-        print("CONTENT:")
-        print(doc.page_content)
-        print("\nMETADATA:")
-        print(doc.metadata)
 
 
 current_dir = Path(__file__).parent

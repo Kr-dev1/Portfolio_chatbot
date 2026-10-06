@@ -29,6 +29,11 @@ dependencies = [
     "flashrank>=0.2.10",
     "sqlmodel>=0.0.47",
     "psycopg2-binary>=2.9.13",
+    "google-api-python-client>=2.201.0",
+    "google-auth-httplib2>=0.4.4",
+    "google-auth-oauthlib>=1.5.0",
+    "ipython>=9.17.1",
+    "ipykernel>=7.4.0",
 ]
 
 [project.scripts]
