@@ -26,6 +26,8 @@ class ChatRequest(BaseModel):
 
 @router.post("")
 async def chat(request: ChatRequest):
+    request_start = time.perf_counter()
+
     thread_id = request.thread_id or str(uuid.uuid4())
 
     config: RunnableConfig = {
@@ -33,7 +35,10 @@ async def chat(request: ChatRequest):
     }
 
     async def generate():
+        graph_start = time.perf_counter()
+        first_token_time = None
         full_response = []
+
         async for message, metadata in graph.astream(
             State(
                 user_input=request.user_message,
@@ -42,12 +47,43 @@ async def chat(request: ChatRequest):
             config,
             stream_mode="messages",
         ):
+            node = metadata.get("langgraph_node")
+
+            if node not in {
+                "chat",
+                "guardrail_fail",
+                "get_more_info",
+            }:
+                continue
+
             if message and hasattr(message, "content") and message.content:
+                if first_token_time is None:
+                    first_token_time = time.perf_counter()
+
+                    print(
+                        f"[TIMING] First token: "
+                        f"{first_token_time - graph_start:.3f}s"
+                    )
+
                 full_response.append(message.content)
-                yield message.content.encode("utf-8")
+                yield message.content
+
+        stream_end = time.perf_counter()
+
+        print(
+            f"[TIMING] Graph stream complete: "
+            f"{stream_end - graph_start:.3f}s"
+        )
+
+        print(
+            f"[TIMING] Request → stream complete: "
+            f"{stream_end - request_start:.3f}s"
+        )
 
         await message_logger(
-            thread_id=thread_id, message=request.user_message, role=Role.USER
+            thread_id=thread_id,
+            message=request.user_message,
+            role=Role.USER,
         )
 
         await message_logger(
@@ -58,7 +94,9 @@ async def chat(request: ChatRequest):
 
         state_snapshot = await graph.aget_state(config)
 
-        state_update = await compact_conversation(State(**state_snapshot.values))
+        state_update = await compact_conversation(
+            State(**state_snapshot.values)
+        )
 
         if state_update:
             await graph.aupdate_state(
@@ -67,5 +105,7 @@ async def chat(request: ChatRequest):
             )
 
     return StreamingResponse(
-        generate(), media_type="text/plain", headers={"X_Thread_ID": thread_id}
+        generate(),
+        media_type="text/plain",
+        headers={"X_Thread_ID": thread_id},
     )
