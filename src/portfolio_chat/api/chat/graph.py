@@ -1,19 +1,18 @@
-from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
-from langgraph.prebuilt.tool_node import ToolNode
 
 from portfolio_chat.api.chat.nodes import (
     availability_confirmation,
     chat_node,
     check_availability,
+    denied_request,
     extract_user_info,
     get_availability_info,
     guard_rail_and_classiier_node,
     guardrail_fail_node,
+    save_approval_request,
 )
 from portfolio_chat.api.chat.state import State
-
-memory = MemorySaver()
+from portfolio_chat.api.chat.tools import create_event
 
 graph_handler = StateGraph(State)
 
@@ -35,51 +34,76 @@ def calendar_router(state: State):
 
 
 def clendar_action_router(state: State):
-    if not state.calendar_available or not state.email or not state.name:
+    if state.calendar_available is False:
         return "get_more_info"
-    else:
-        return "availability_confirmation"
+
+    if not state.email or not state.name or not state.event_description:
+        return "get_more_info"
+
+    return "save_approval_request"
 
 
-# Nodes
-graph_handler.add_node("guardrail", guard_rail_and_classiier_node)
-graph_handler.add_node("chat", chat_node)
-graph_handler.add_node("guardrail_fail", guardrail_fail_node)
-graph_handler.add_node("calendar_info_extractor", extract_user_info)
-graph_handler.add_node("check_availability", check_availability)
-graph_handler.add_node("get_more_info", get_availability_info)
-graph_handler.add_node("availability_confirmation", availability_confirmation)
+def approval_router(state: State):
+    if state.booking_approved:
+        return "create_event"
+    return "denied_request"
 
 
-# Edges
-graph_handler.add_edge(START, "guardrail")
-graph_handler.add_edge("chat", END)
-graph_handler.add_edge("guardrail_fail", END)
+def build_graph(checkpointer):
+    # Nodes
+    graph_handler.add_node("guardrail", guard_rail_and_classiier_node)
+    graph_handler.add_node("chat", chat_node)
+    graph_handler.add_node("guardrail_fail", guardrail_fail_node)
+    graph_handler.add_node("calendar_info_extractor", extract_user_info)
+    graph_handler.add_node("check_availability", check_availability)
+    graph_handler.add_node("get_more_info", get_availability_info)
+    graph_handler.add_node("save_approval_request", save_approval_request)
+    graph_handler.add_node("availability_confirmation", availability_confirmation)
+    graph_handler.add_node("create_event", create_event)
+    graph_handler.add_node("denied_request", denied_request)
 
-# Conditionals
-graph_handler.add_conditional_edges(
-    "guardrail",
-    guardrail_router,
-    {
-        "guardrail_fail": "guardrail_fail",
-        "calendar_info_extractor": "calendar_info_extractor",
-        "chat": "chat",
-    },
-)
+    # Edges
+    graph_handler.add_edge(START, "guardrail")
+    graph_handler.add_edge(
+        "save_approval_request",
+        "availability_confirmation",
+    )
+    graph_handler.add_edge("chat", END)
+    graph_handler.add_edge("guardrail_fail", END)
 
-graph_handler.add_conditional_edges(
-    "calendar_info_extractor",
-    calendar_router,
-    {"get_more_info": "get_more_info", "check_availability": "check_availability"},
-)
+    # Conditionals
+    graph_handler.add_conditional_edges(
+        "guardrail",
+        guardrail_router,
+        {
+            "guardrail_fail": "guardrail_fail",
+            "calendar_info_extractor": "calendar_info_extractor",
+            "chat": "chat",
+        },
+    )
 
-graph_handler.add_conditional_edges(
-    "check_availability",
-    clendar_action_router,
-    {
-        "get_more_info": "get_more_info",
-        "availability_confirmation": "availability_confirmation",
-    },
-)
+    graph_handler.add_conditional_edges(
+        "calendar_info_extractor",
+        calendar_router,
+        {"get_more_info": "get_more_info", "check_availability": "check_availability"},
+    )
 
-graph = graph_handler.compile(checkpointer=memory)
+    graph_handler.add_conditional_edges(
+        "check_availability",
+        clendar_action_router,
+        {
+            "get_more_info": "get_more_info",
+            "save_approval_request": "save_approval_request",
+        },
+    )
+
+    graph_handler.add_conditional_edges(
+        "availability_confirmation",
+        approval_router,
+        {
+            "create_event": "create_event",
+            "denied_request": "denied_request",
+        },
+    )
+
+    return graph_handler.compile(checkpointer=checkpointer)

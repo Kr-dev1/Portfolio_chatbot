@@ -5,7 +5,12 @@ from langchain_qdrant import QdrantVectorStore
 from langgraph.graph.message import REMOVE_ALL_MESSAGES
 
 from portfolio_chat.api.chat.state import State
-from portfolio_chat.config import GEMINI_API_KEY, QDRANT_API_KEY, QDRANT_URL
+from portfolio_chat.config import (
+    GEMINI_API_KEY,
+    GROQ_API_KEY,
+    QDRANT_API_KEY,
+    QDRANT_URL,
+)
 
 embeddings = GoogleGenerativeAIEmbeddings(
     model="gemini-embedding-2-preview",
@@ -23,7 +28,7 @@ retriever = vector_store.as_retriever(search_kwargs={"k": 5})
 
 
 def conversation_summariser(messages: list, existing_summary: str | None):
-    llm = init_chat_model(model="gemini-3.1-flash-lite", api_key=GEMINI_API_KEY)
+    llm = init_chat_model(model="groq:openai/gpt-oss-120b", api_key=GROQ_API_KEY)
 
     prompt = f"""Summarize the conversation into compact memory for a future LLM.
 
@@ -36,6 +41,7 @@ def conversation_summariser(messages: list, existing_summary: str | None):
     - Important technical context, errors, and solutions
     - Unresolved questions or pending decisions
     - Previous questions or answers that may matter later
+    - Retain the users initial intentions and always include important information like email or other descriptions
 
     Rules:
     - Never invent or infer information.

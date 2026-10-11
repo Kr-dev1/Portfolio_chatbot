@@ -12,6 +12,7 @@ def usage_logger(
     total_tokens: int,
     reasoning_tokens: int,
     guardrail_triggered: bool,
+    node: str
 ):
     logs = AIusage(
         chat_model=chat_model,
@@ -21,6 +22,7 @@ def usage_logger(
         total_tokens=total_tokens,
         reasoning_tokens=reasoning_tokens,
         guardrail_triggered=guardrail_triggered,
+        node=node
     )
 
     with Session(engine) as session:

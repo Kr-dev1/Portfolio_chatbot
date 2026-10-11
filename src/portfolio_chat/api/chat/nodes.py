@@ -7,12 +7,12 @@ from zoneinfo import ZoneInfo
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import BaseMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate
+from langgraph.types import interrupt
 from pydantic import BaseModel, Field
 
 from portfolio_chat.api.chat.state import State
 from portfolio_chat.api.chat.tools import (
     calendar_id,
-    tools,
 )
 from portfolio_chat.config import (
     GROQ_API_KEY,
@@ -21,6 +21,8 @@ from portfolio_chat.scripts.google_calendar import service
 from portfolio_chat.tools.helpers.helper import retriever
 from portfolio_chat.tools.logger.guardrail import guardrail_logger
 from portfolio_chat.tools.logger.logger import usage_logger
+from portfolio_chat.tools.logger.models import status
+from portfolio_chat.tools.logger.request import create_req, update_req
 
 guard_rail_model = "gpt-6-luna"
 chat_model = "groq:openai/gpt-oss-20b"
@@ -67,6 +69,15 @@ class GetUserInfo(BaseModel):
         description="The requested meeting end date and time.",
     )
 
+    event_description: str | None = Field(
+        default=None,
+        description=(
+            """A short summary on what the event/meeting is being created for.
+            Example:
+                Interview at Meta
+                Build a ai chatbot for company"""
+        ),
+    )
     attendees: list[str] = Field(
         default_factory=list,
         description=(
@@ -174,6 +185,7 @@ def guard_rail_and_classiier_node(state: State):
                 or the conversation.
 
                 IMPORTANT:
+                Kasturi is male.
                 The latest message may be a continuation of an earlier request.
                 For example:
 
@@ -185,17 +197,7 @@ def guard_rail_and_classiier_node(state: State):
                 must be true.x
                 Do not answer the user's question. Only classify it.
                 """,
-            ),
-            (
-                "human",
-                """
-                Recent conversation:
-                {conversation}
-
-                Latest user message:
-                {user_input}
-                """,
-            ),
+            )
         ]
     )
 
@@ -206,6 +208,7 @@ def guard_rail_and_classiier_node(state: State):
             {
                 "conversation": recent_messages,
                 "user_input": user_input,
+                "summary": state.conversation_summary,
             }
         ),
     )
@@ -348,8 +351,7 @@ def chat_node(state: State):
 
     messages.extend(state.messages)
 
-    llm_with_tools = llm.bind_tools(tools)
-    resp = llm_with_tools.invoke(messages)
+    resp = llm.invoke(messages)
     usage = resp.usage_metadata
     if usage:
         metrics = {
@@ -373,6 +375,7 @@ def chat_node(state: State):
             total_tokens=metrics["total_tokens"],
             reasoning_tokens=metrics["reasoning_tokens"],
             guardrail_triggered=False,
+            node="chat"
         )
 
     return {"messages": [resp], "context": context, "response": resp.content}
@@ -428,7 +431,7 @@ def extract_user_info(state: State):
     Asia/Kolkata
 
     User message:
-    {user_input}
+    {user_input, state.messages, state.conversation_summary}
 
     Rules:
     - The calendar owner is Kasturi.
@@ -440,7 +443,9 @@ def extract_user_info(state: State):
         "This is Sarah" -> name = "Sarah"
     - If the user says they want to schedule a meeting "with Kasturi",
       Kasturi is the calendar owner and must NOT be extracted as `name`.
+    - If there is one singular email it is always the persons email.
     - Do not put names into `attendees`.
+    - If the exact time and date is not present, ex:- next week at 2pm donot extract.
     - `attendees` must contain only explicitly provided attendee email addresses.
     - Extract the requester's email when explicitly provided.
     - Resolve relative dates such as "today", "tomorrow", and "next Monday"
@@ -461,12 +466,15 @@ def extract_user_info(state: State):
     else:
         end_time = state.end_time
 
+    print(result)
+
     return {
         "name": result.name or state.name,
         "email": result.email or state.email,
         "start_time": start_time,
         "end_time": end_time,
         "attendees": result.attendees or state.attendees,
+        "event_description": result.event_description or state.event_description,
     }
 
 
@@ -476,7 +484,8 @@ def get_availability_info(state: State):
         missing.append("start_time")
     if not state.name and state.start_time:
         missing.append("name")
-
+    if not state.event_description and state.start_time:
+        missing.append("meeting_summary")
     if not state.email and state.start_time:
         missing.append("email")
 
@@ -485,7 +494,6 @@ def get_availability_info(state: State):
         api_key=GROQ_API_KEY,
         temperature=0,
     )
-
     prompt = ""
 
     if state.calendar_available is False:
@@ -493,21 +501,23 @@ def get_availability_info(state: State):
         The user wants to schedule a meeting, but the meeting slot is already booked during the same interval.
         Here are all the events from that day {state.calendar_events}.
         Ask the user for the date and time they would like to re-schedule the
-        meeting since the original time they pick is already booked.
+        meeting since the original time they picked is already booked.
 
         Do not ask for their name, email, attendees, or other information yet.
         Keep the response concise and conversational.
         Return only the message shown to the user."""
     else:
         prompt = f"""
+        This means there is a meeting slot available respond based on the user input {state.user_input}
         The user wants to schedule a meeting, but the meeting {missing} missing.
-        Ask the user for the missing fields.
 
-        if the missing items dosent have start_time, Ask the user if there will be anyother attendees as well to add to the meeting
+        If name is missing it is the name of the user and not the name for the meeting.
+
 
         Do not ask for any additional information yet.
         Keep the response concise and conversational.
         Return only the message shown to the user.
+        Request only the fields that are missing
         """
 
     response = llm.invoke(prompt)
@@ -515,7 +525,6 @@ def get_availability_info(state: State):
 
 
 def check_availability(state: State):
-    print(state)
     if not state.start_time or not state.end_time:
         raise ValueError("Start time and end time are required")
 
@@ -545,5 +554,119 @@ def check_availability(state: State):
     return {"calendar_events": check_event, "calendar_available": False}
 
 
+def save_approval_request(state: State):
+    req_id = str(uuid.uuid4())
+
+    data = {
+        "thread_id": state.thread_id,
+        "req_id": req_id,
+        "name": state.name,
+        "email": state.email,
+        "start_date_time": state.start_time,
+        "end_date_time": state.end_time,
+        "event_description": state.event_description,
+        "status": "pending",
+    }
+
+    create_req(**data)
+
+    llm = init_chat_model(model=chat_model, api_key=GROQ_API_KEY)
+
+    response = llm.invoke(
+        f"""
+        The user's meeting request has been saved and is pending verification.
+
+        Meeting: {state.event_description}
+        Start time: {state.start_time}
+
+        Tell the user that their request has been submitted provisionally
+        and that they will receive an email from assistant@krangan.dev
+        once Kasturi verifies it.
+
+        Keep the response concise and conversational.
+        Do not imply that the calendar event has already been created.
+        """
+    )
+
+    return {
+        "req_id": req_id,
+        "messages": [response],
+        "response": response.content,
+    }
+
+
 def availability_confirmation(state: State):
-    req_id = uuid.uuid4()
+    data = {
+        "req_id": state.req_id,
+        "thread_id": state.thread_id,
+        "name": state.name,
+        "email": state.email,
+        "start_date_time": state.start_time,
+        "end_date_time": state.end_time,
+        "event_description": state.event_description,
+    }
+
+    interrupt(data)
+
+    return {}
+
+
+def create_event(state: State):
+    if not state.start_time or not state.end_time:
+        raise ValueError("Start time and end time are required")
+
+    event = {
+        "summary": state.event_description,
+        "description": f"Meeting requested by {state.name}",
+        "start": {
+            "dateTime": state.start_time.isoformat(),
+            "timeZone": "Asia/Kolkata",
+        },
+        "end": {
+            "dateTime": state.end_time.isoformat(),
+            "timeZone": "Asia/Kolkata",
+        },
+        "attendees": [
+            {"email": state.email},
+            *[{"email": email} for email in state.attendees],
+        ],
+    }
+
+    created_event = (
+        service.events()
+        .insert(
+            calendarId=calendar_id,
+            body=event,
+            sendUpdates="all",
+        )
+        .execute()
+    )
+
+    if not state.req_id or state.booking_approved is not True:
+        raise ValueError("Request ID missing or request not approved")
+
+    approval = status.APPROVED
+
+    update_req(req_id=state.req_id, approval=approval)
+
+    return {
+        "response": (
+            f"Your meeting has been confirmed for {state.start_time.isoformat()}."
+        ),
+        "calendar_event_id": created_event["id"],
+    }
+
+
+def denied_request(state: State):
+    if not state.req_id or state.booking_approved is not False:
+        raise ValueError("Request ID missing or request not approved")
+
+    approval = status.DECLINED
+
+    update_req(req_id=state.req_id, approval=approval)
+
+    return {
+        "response": (
+            "Your meeting request could not be approved. No calendar event was created."
+        )
+    }
