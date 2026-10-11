@@ -1,0 +1,30 @@
+
+name: Deploy Portfolio Chatbot
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-chatbot-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Update repository
+        run: |
+          set -euo pipefail
+          cd /home/n4rut0/apps/Portfolio_chatbot
+          git fetch origin main
+          git merge --ff-only origin/main
+
+      - name: Deploy blue-green
+        run: |
+          sudo -n /opt/portfolio-chatbot/deploy.sh
