@@ -5,16 +5,10 @@ langgraph
 langchain-openai
 langchain-groq
 langchain-google-genai
-pypdf
-pymupdf
 langchain-tavily
 python-dotenv
 qdrant-client
 langchain-text-splitters
-langchain-unstructured
-Unstructured-client
-unstructured
-unstructured[pdf]
 markdown
 langchain-qdrant
 sqlmodel
