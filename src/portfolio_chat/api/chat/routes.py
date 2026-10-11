@@ -1,13 +1,12 @@
 import time
 import uuid
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse
 from langchain_core.messages import HumanMessage
 from langchain_core.runnables import RunnableConfig
 from pydantic import BaseModel
 
-from portfolio_chat.api.chat.graph import graph
 from portfolio_chat.api.chat.state import State
 from portfolio_chat.tools.helpers.helper import compact_conversation
 from portfolio_chat.tools.messages.message_logger import message_logger
@@ -25,24 +24,24 @@ class ChatRequest(BaseModel):
 
 
 @router.post("")
-async def chat(request: ChatRequest):
-    request_start = time.perf_counter()
-
-    thread_id = request.thread_id or str(uuid.uuid4())
+async def chat(chat_req: ChatRequest, request: Request):
+    thread_id = chat_req.thread_id or str(uuid.uuid4())
+    graph = request.app.state.graph
 
     config: RunnableConfig = {
         "configurable": {"thread_id": thread_id, "recursion_limit": 4}
     }
 
     async def generate():
-        graph_start = time.perf_counter()
         first_token_time = None
         full_response = []
+        node = ""
 
         async for message, metadata in graph.astream(
             State(
-                user_input=request.user_message,
-                messages=[HumanMessage(content=request.user_message)],
+                thread_id=thread_id,
+                user_input=chat_req.user_message,
+                messages=[HumanMessage(content=chat_req.user_message)],
             ),
             config,
             stream_mode="messages",
@@ -53,50 +52,33 @@ async def chat(request: ChatRequest):
                 "chat",
                 "guardrail_fail",
                 "get_more_info",
+                "availability_confirmation",
             }:
                 continue
 
             if message and hasattr(message, "content") and message.content:
                 if first_token_time is None:
                     first_token_time = time.perf_counter()
-
-                    print(
-                        f"[TIMING] First token: "
-                        f"{first_token_time - graph_start:.3f}s"
-                    )
-
                 full_response.append(message.content)
                 yield message.content
 
-        stream_end = time.perf_counter()
-
-        print(
-            f"[TIMING] Graph stream complete: "
-            f"{stream_end - graph_start:.3f}s"
-        )
-
-        print(
-            f"[TIMING] Request → stream complete: "
-            f"{stream_end - request_start:.3f}s"
-        )
-
         await message_logger(
             thread_id=thread_id,
-            message=request.user_message,
+            message=chat_req.user_message,
             role=Role.USER,
+            node=node,
         )
 
         await message_logger(
             thread_id=thread_id,
             message="".join(full_response),
             role=Role.ASSISTANT,
+            node=node,
         )
 
         state_snapshot = await graph.aget_state(config)
 
-        state_update = await compact_conversation(
-            State(**state_snapshot.values)
-        )
+        state_update = await compact_conversation(State(**state_snapshot.values))
 
         if state_update:
             await graph.aupdate_state(

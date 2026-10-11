@@ -8,6 +8,9 @@ from pydantic import BaseModel, Field
 
 
 class State(BaseModel):
+    thread_id: str
+    req_id: str | None = None
+
     messages: Annotated[list[BaseMessage], add_messages] = Field(default_factory=list)
     conversation_summary: str | None = None
     context: list[Document] = Field(default_factory=list)
@@ -28,3 +31,5 @@ class State(BaseModel):
     attendees: list[str] = Field(default_factory=list)
     calendar_events: list | None = None
     calendar_available: bool | None = None
+    event_description: str | None = None
+    booking_approved: bool | None = None

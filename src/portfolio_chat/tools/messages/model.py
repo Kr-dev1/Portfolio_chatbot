@@ -15,3 +15,4 @@ class Messages(SQLModel, table=True):
     thread_id: str
     role: Role
     message: str
+    node: str

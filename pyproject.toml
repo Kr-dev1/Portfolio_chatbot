@@ -30,6 +30,13 @@ dependencies = [
     "ipython>=9.17.1",
     "ipykernel>=7.4.0",
     "langgraph-cli[inmem]>=0.4.33",
+    "langgraph-checkpoint-postgres>=3.1.2",
+    "pypdf>=6.20.0",
+    "pymupdf>=1.28.2",
+    "langchain-unstructured>=1.0.1",
+    "unstructured-client>=0.46.2",
+    "unstructured[pdf]>=0.27.25",
+    "psycopg[binary]>=3.3.6",
 ]
 
 [project.scripts]
