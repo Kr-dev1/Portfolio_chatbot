@@ -16,3 +16,4 @@ __pycache__/
 # Local data
 data/
 tests/
+.langgraph_api

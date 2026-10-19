@@ -16,7 +16,7 @@ def inngest_resume(file_path: Path | str):
     splitter = MarkdownHeaderTextSplitter(
         headers_to_split_on=[
             ("#", "title"),
-            ("##", "section"),
+            ("##", "category"),
             ("####", "role"),
             ("#####", "company"),
             ("######", "project_name"),

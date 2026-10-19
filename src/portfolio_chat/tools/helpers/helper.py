@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import RemoveMessage
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -11,6 +13,8 @@ from portfolio_chat.config import (
     QDRANT_API_KEY,
     QDRANT_URL,
 )
+from portfolio_chat.scripts.google_calendar import service
+from portfolio_chat.tools.requests.request import get_events_time
 
 embeddings = GoogleGenerativeAIEmbeddings(
     model="gemini-embedding-2-preview",
@@ -33,15 +37,9 @@ def conversation_summariser(messages: list, existing_summary: str | None):
     prompt = f"""Summarize the conversation into compact memory for a future LLM.
 
     Preserve only information that could be useful later, including:
-    - Important facts the user provided
-    - Preferences and constraints
-    - Decisions and conclusions
-    - Ongoing tasks or plans
-    - Dates, times, events, and commitments
-    - Important technical context, errors, and solutions
-    - Unresolved questions or pending decisions
-    - Previous questions or answers that may matter later
-    - Retain the users initial intentions and always include important information like email or other descriptions
+    - Original Intention
+    - Emails any time and date mentioned
+    - Details that can be usefull
 
     Rules:
     - Never invent or infer information.
@@ -61,7 +59,7 @@ def conversation_summariser(messages: list, existing_summary: str | None):
     return result.content
 
 
-MAX_MESSAGES = 10
+MAX_MESSAGES = 40
 KEEP_MESSAGES = 4
 
 
@@ -84,3 +82,25 @@ async def compact_conversation(state: State) -> dict:
             *recent_messages,
         ],
     }
+
+
+def check_events(start_time: datetime, end_time: datetime):
+    pending_events = []
+    events = (
+        service.events()
+        .list(
+            calendarId="primary",
+            timeMin=start_time.isoformat(),
+            timeMax=end_time.isoformat(),
+            singleEvents=True,
+            orderBy="startTime",
+        )
+        .execute()
+    )
+    if start_time and end_time:
+        pending_events_check = get_events_time(start_time, end_time)
+        print(pending_events_check)
+        if pending_events_check:
+            for event in pending_events_check:
+                pending_events.append({"start_time":event.start_date_time, "end_time": event.end_date_time})
+    return {"google_calendar": events["items"], "pending_requests": pending_events}
