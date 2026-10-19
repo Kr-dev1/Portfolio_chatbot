@@ -33,6 +33,9 @@ dependencies = [
     "langgraph-checkpoint-postgres>=3.1.2",
     "langchain-unstructured>=1.0.1",
     "psycopg[binary]>=3.3.6",
+    "httpx>=0.28.1",
+    "langgraph-api>=0.16.0",
+    "langchain-deepseek>=1.1.1",
 ]
 
 [project.scripts]

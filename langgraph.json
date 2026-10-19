@@ -1,0 +1,7 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "portfolio_assistant": "./src/portfolio_chat/api/chat/graph.py:studio_graph"
+  },
+  "env": ".env"
+}

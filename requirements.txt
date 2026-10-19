@@ -20,3 +20,4 @@ ipython
 ipykernel
 langgraph-checkpoint-postgres
 psycopg[binary]
+langchain-deepseek
