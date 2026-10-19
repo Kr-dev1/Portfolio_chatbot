@@ -404,7 +404,7 @@ async def chat_node(state: State):
 async def guardrail_fail_node(state: State):
     user_input = state.user_input
     reason = state.reason
-    llm = init_chat_model(model=chat_model, api_key=DEEPSEEK_API_KEY)
+    llm = init_chat_model(model=chat_model, api_key=GROQ_API_KEY)
 
     prompt = f"""
         You are Kasturi's portfolio assistant.
@@ -436,7 +436,7 @@ async def guardrail_fail_node(state: State):
 def extract_user_info(state: State):
     user_input = state.user_input
     llm = init_chat_model(
-        model=classifier_model, model_provider="deepseek"
+        model=classifier_model, model_provider="deepseek", api_key=DEEPSEEK_API_KEY
     ).with_structured_output(GetUserInfo)
 
     now = datetime.now(ZoneInfo("Asia/Kolkata"))
