@@ -1,19 +1,33 @@
-# Environment
+# Environment and secrets
 .env
 .env.*
 !.env.example
+client_secret*.json
+credentials.json
+token.json
+*.pem
+*.key
 
 # Python
 __pycache__/
 *.py[cod]
 .venv/
+*.egg-info/
+dist/
+build/
 *.ipynb
 
-# IDE
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+
+# IDE and OS
 .vscode/
 .idea/
+.DS_Store
 
 # Local data
 data/
-tests/
-.langgraph_api
+.langgraph_api/

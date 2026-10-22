@@ -3,6 +3,7 @@ from enum import Enum
 from uuid import uuid4
 from zoneinfo import ZoneInfo
 
+from pydantic import BaseModel
 from sqlmodel import Field, SQLModel
 
 
@@ -19,10 +20,16 @@ class status(str, Enum):
 class ApprovalRequests(SQLModel, table=True):
     req_id: str = Field(default_factory=lambda: str(uuid4()), primary_key=True)
     thread_id: str
+    gca_id: str | None
     name: str
     start_date_time: datetime
     end_date_time: datetime
-    created_at: datetime = Field(default_factory=get_ist_now)
     email: str
     event_description: str
     status: status
+    created_at: datetime = Field(default_factory=get_ist_now)
+
+
+class UpdateRequestResult(BaseModel):
+    event_declined: bool
+    request: ApprovalRequests | None
