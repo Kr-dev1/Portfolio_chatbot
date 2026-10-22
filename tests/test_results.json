@@ -1,0 +1,677 @@
+{
+  "metadata": {
+    "total_questions": 95,
+    "completed": 95,
+    "passed": 95,
+    "failed": 0,
+    "endpoint": "http://127.0.0.1:8000/chat",
+    "timestamp": "2026-10-04T13:54:03.025297+00:00"
+  },
+  "results": [
+    {
+      "question": "Who is Kasturi?",
+      "response": "Kasturi is a Full‑Stack Product Engineer based in Bangalore, India, with over two years of professional software development experience.",
+      "status_code": 200,
+      "response_time_seconds": 2.935,
+      "error": null
+    },
+    {
+      "question": "What does Kasturi do?",
+      "response": "Kasturi is a Full‑Stack Product Engineer based in Bangalore, India, specializing in frontend‑heavy full‑stack development.",
+      "status_code": 200,
+      "response_time_seconds": 2.179,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's current role?",
+      "response": "Kasturi is a Full‑Stack Product Engineer.",
+      "status_code": 200,
+      "response_time_seconds": 2.338,
+      "error": null
+    },
+    {
+      "question": "Where is Kasturi based?",
+      "response": "Kasturi is based in Bangalore, India.",
+      "status_code": 200,
+      "response_time_seconds": 5.165,
+      "error": null
+    },
+    {
+      "question": "How much experience does Kasturi have?",
+      "response": "Kasturi has over two years of professional software development experience.",
+      "status_code": 200,
+      "response_time_seconds": 17.222,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's professional background?",
+      "response": "Kasturi is a Full‑Stack Product Engineer based in Bangalore with over two years of professional software development experience.",
+      "status_code": 200,
+      "response_time_seconds": 5.961,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's education?",
+      "response": "Kasturi completed Higher Secondary at Gopalan College of Commerce from 2016 to 2018 and finished a Frontend Developer Bootcamp.",
+      "status_code": 200,
+      "response_time_seconds": 17.977,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's email?",
+      "response": "Kasturi's email is me@krangan.dev.",
+      "status_code": 200,
+      "response_time_seconds": 18.732,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's LinkedIn?",
+      "response": "Kasturi's LinkedIn is linkedin.com/in/-kasturirangan.",
+      "status_code": 200,
+      "response_time_seconds": 16.815,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's GitHub?",
+      "response": "Kasturi's GitHub is github.com/kr-dev1.",
+      "status_code": 200,
+      "response_time_seconds": 17.25,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's portfolio?",
+      "response": "Kasturi's portfolio is krangan.dev.",
+      "status_code": 200,
+      "response_time_seconds": 15.969,
+      "error": null
+    },
+    {
+      "question": "How can I contact Kasturi?",
+      "response": "You can contact Kasturi through the following methods:\n\n- **Email:** me@krangan.dev\n- **LinkedIn:** linkedin.com/in/-kasturirangan\n- **GitHub:** github.com/kr-dev1\n- **Portfolio:** krangan.dev",
+      "status_code": 200,
+      "response_time_seconds": 17.572,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's phone number?",
+      "response": "I'm sorry, but I don't have that information.",
+      "status_code": 200,
+      "response_time_seconds": 18.769,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's WhatsApp number?",
+      "response": "I don't have that information.",
+      "status_code": 200,
+      "response_time_seconds": 3.345,
+      "error": null
+    },
+    {
+      "question": "Can I contact Kasturi on WhatsApp?",
+      "response": "Kasturi's contact methods are email (me@krangan.dev), LinkedIn (linkedin.com/in/-kasturirangan), GitHub (github.com/kr-dev1), and his portfolio (krangan.dev).",
+      "status_code": 200,
+      "response_time_seconds": 15.793,
+      "error": null
+    },
+    {
+      "question": "Where does Kasturi currently work?",
+      "response": "I'm not aware of a current employer listed for Kasturi.",
+      "status_code": 200,
+      "response_time_seconds": 9.839,
+      "error": null
+    },
+    {
+      "question": "What companies has Kasturi worked for?",
+      "response": "Kasturi has worked for the following companies:\n\n- **VascoTech**\n- **Meyi Cloud**",
+      "status_code": 200,
+      "response_time_seconds": 13.786,
+      "error": null
+    },
+    {
+      "question": "What was Kasturi's role at Meyi Cloud?",
+      "response": "Kasturi was an **Associate MERN Developer** at Meyi Cloud.",
+      "status_code": 200,
+      "response_time_seconds": 15.809,
+      "error": null
+    },
+    {
+      "question": "What did Kasturi do at VascoTech?",
+      "response": "At VascoTech, Kasturi led the full‑stack development of **Rankr**, an AI‑powered exam‑preparation platform. He built a modular React dashboard.",
+      "status_code": 200,
+      "response_time_seconds": 17.665,
+      "error": null
+    },
+    {
+      "question": "What kind of work has Kasturi done professionally?",
+      "response": "Kasturi has worked as a full‑stack product engineer, focusing on frontend‑heavy full‑stack development with JavaScript and TypeScript.",
+      "status_code": 200,
+      "response_time_seconds": 15.183,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked as a frontend developer?",
+      "response": "Yes, Kasturi has worked as a frontend developer. He served as an Associate MERN Developer at Meyi Cloud, where he revamped the UI.",
+      "status_code": 200,
+      "response_time_seconds": 17.688,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked as a full-stack developer?",
+      "response": "Yes, Kasturi has worked as a full‑stack developer.",
+      "status_code": 200,
+      "response_time_seconds": 18.225,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked with AI professionally?",
+      "response": "Yes. Kasturi has professionally worked on AI‑powered applications, including building AI chat systems, integrating LangChain and LangGraph.",
+      "status_code": 200,
+      "response_time_seconds": 11.9,
+      "error": null
+    },
+    {
+      "question": "Does Kasturi know React?",
+      "response": "Yes, Kasturi knows React.",
+      "status_code": 200,
+      "response_time_seconds": 15.87,
+      "error": null
+    },
+    {
+      "question": "Does Kasturi have experience with Next.js?",
+      "response": "Yes, Kasturi has experience with Next.js.",
+      "status_code": 200,
+      "response_time_seconds": 7.207,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked with Python?",
+      "response": "Yes, Kasturi has worked with Python.",
+      "status_code": 200,
+      "response_time_seconds": 19.105,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked with Rust?",
+      "response": "Kasturi does not have documented experience with Rust.",
+      "status_code": 200,
+      "response_time_seconds": 15.845,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked with Go?",
+      "response": "Kasturi does not have documented experience with Go.",
+      "status_code": 200,
+      "response_time_seconds": 3.303,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked with Java?",
+      "response": "Kasturi does not have documented experience with Java.",
+      "status_code": 200,
+      "response_time_seconds": 18.518,
+      "error": null
+    },
+    {
+      "question": "Does Kasturi know PostgreSQL?",
+      "response": "Yes, Kasturi knows PostgreSQL.",
+      "status_code": 200,
+      "response_time_seconds": 16.401,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked with MongoDB?",
+      "response": "Yes, Kasturi has worked with MongoDB.",
+      "status_code": 200,
+      "response_time_seconds": 17.17,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi used LangChain?",
+      "response": "Yes, Kasturi has used LangChain.",
+      "status_code": 200,
+      "response_time_seconds": 15.239,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi used LangGraph?",
+      "response": "Yes, Kasturi has used LangGraph.",
+      "status_code": 200,
+      "response_time_seconds": 15.817,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked with Qdrant?",
+      "response": "Yes, Kasturi has worked with Qdrant, using it in RAG pipelines for semantic retrieval.",
+      "status_code": 200,
+      "response_time_seconds": 6.026,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi built RAG systems?",
+      "response": "Yes. Kasturi has built RAG systems, such as the AskRepo knowledge‑base and the RAG pipelines integrated into LegalHawk.",
+      "status_code": 200,
+      "response_time_seconds": 4.601,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi used React with Python?",
+      "response": "There is no documented evidence that Kasturi has combined React with Python in a single project.",
+      "status_code": 200,
+      "response_time_seconds": 18.18,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi used LangGraph with Qdrant?",
+      "response": "There is no documented evidence that Kasturi has combined LangGraph with Qdrant in his projects.",
+      "status_code": 200,
+      "response_time_seconds": 10.726,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi used FastAPI professionally?",
+      "response": "Kasturi does not have documented experience with FastAPI.",
+      "status_code": 200,
+      "response_time_seconds": 10.857,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi built a Python backend?",
+      "response": "Kasturi has not documented building a Python‑based backend.",
+      "status_code": 200,
+      "response_time_seconds": 16.723,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi built a RAG system using Qdrant?",
+      "response": "Yes, Kasturi has built a RAG system that uses Qdrant for vector search.",
+      "status_code": 200,
+      "response_time_seconds": 19.355,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi used OpenAI in production?",
+      "response": "Yes, Kasturi has used OpenAI in production.",
+      "status_code": 200,
+      "response_time_seconds": 10.112,
+      "error": null
+    },
+    {
+      "question": "What projects has Kasturi built?",
+      "response": "Kasturi has built the following projects:\n\n- **Rankr** – an AI‑powered exam‑prep platform with modular React dashboards.\n- **AskRepo** – a RAG-based knowledge system for GitHub repositories.\n- **LegalHawk** – an AI-powered contract analysis application.",
+      "status_code": 200,
+      "response_time_seconds": 13.11,
+      "error": null
+    },
+    {
+      "question": "Tell me about AskRepo.",
+      "response": "AskRepo is a project Kasturi built that turns GitHub repositories into interactive knowledge bases. It uses a RAG (retrieval‑augmented generation) pipeline with embeddings and vector search to let users query and explore repository content. The tech stack includes Next.js, Supabase, Prisma, LangChain, React Query, Tailwind, and ShadcnUI.",
+      "status_code": 200,
+      "response_time_seconds": 2.99,
+      "error": null
+    },
+    {
+      "question": "What is LegalHawk?",
+      "response": "LegalHawk is an AI‑powered contract analysis system that lets users ingest documents, perform semantic search, and ask interactive questions about the content.",
+      "status_code": 200,
+      "response_time_seconds": 2.371,
+      "error": null
+    },
+    {
+      "question": "What did Kasturi build with AskRepo?",
+      "response": "Kasturi built a RAG‑based system that turns GitHub repositories into interactive knowledge bases, leveraging embeddings and vector search.",
+      "status_code": 200,
+      "response_time_seconds": 2.104,
+      "error": null
+    },
+    {
+      "question": "What problem does LegalHawk solve?",
+      "response": "LegalHawk addresses the challenge of quickly and accurately understanding legal documents. It lets users ingest contracts, perform semantic search across them, and engage in interactive Q&A to extract insights and answers directly from the text.",
+      "status_code": 200,
+      "response_time_seconds": 1.977,
+      "error": null
+    },
+    {
+      "question": "What technologies did Kasturi use for AskRepo?",
+      "response": "Kasturi built AskRepo using the following stack:\n\n- Next.js  \n- Supabase  \n- Prisma  \n- LangChain  \n- React Query  \n- Tailwind CSS  \n- ShadcnUI  ",
+      "status_code": 200,
+      "response_time_seconds": 6.831,
+      "error": null
+    },
+    {
+      "question": "What technologies did Kasturi use for LegalHawk?",
+      "response": "Kasturi used the following technologies for LegalHawk: Next.js, Supabase, Prisma, LangChain, Uploadthing, Tailwind, and ShadcnUI.",
+      "status_code": 200,
+      "response_time_seconds": 12.591,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi built an AI application?",
+      "response": "Yes, Kasturi has built AI‑powered applications. He created Rankr, an AI‑powered exam preparation platform; AskRepo, a RAG‑based knowledge system for GitHub repositories; and LegalHawk, an AI‑powered contract analysis tool.",
+      "status_code": 200,
+      "response_time_seconds": 11.654,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi built a RAG application?",
+      "response": "Yes. Kasturi built a RAG‑based system called **AskRepo**, which converts GitHub repositories into interactive knowledge bases using embeddings and vector search.",
+      "status_code": 200,
+      "response_time_seconds": 10.288,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi built a document analysis application?",
+      "response": "Yes. Kasturi built LegalHawk, an AI‑powered contract analysis system that handles document ingestion, semantic search, and interactive Q&A.",
+      "status_code": 200,
+      "response_time_seconds": 17.788,
+      "error": null
+    },
+    {
+      "question": "What can Kasturi build?",
+      "response": "Kasturi has built full‑stack web applications, AI‑powered tools, RAG pipelines, and document‑analysis systems. His projects include AskRepo and LegalHawk.",
+      "status_code": 200,
+      "response_time_seconds": 14.398,
+      "error": null
+    },
+    {
+      "question": "What kind of applications can Kasturi build?",
+      "response": "Kasturi can build full‑stack web applications, AI‑powered applications, RAG (retrieval‑augmented generation) systems, and document analysis tools. His projects, such as LegalHawk and AskRepo, demonstrate this experience.",
+      "status_code": 200,
+      "response_time_seconds": 18.162,
+      "error": null
+    },
+    {
+      "question": "What can Kasturi build for a client?",
+      "response": "Kasturi can build end‑to‑end full‑stack web applications that combine modern frontend frameworks (React, Next.js, Vue) with robust back‑ends (Node.js, Fastify, Express) and databases (PostgreSQL, MongoDB, Prisma).  \n\nFor clients needing AI‑powered features, he can create:\n\n- RAG pipelines and semantic search using LangChain, LangGraph, Qdrant, and LLMs such as Google Gemini or OpenAI.  \n- Document‑centric tools (e.g., contract analysis) that ingest files, extract embeddings, and enable interactive Q&A.  \n- Real‑time analytics dashboards with Recharts and responsive layouts.  \n- Subscription and billing flows (auth, billing, API integration) in a MERN‑style stack.  \n- Real‑time chat systems with SSE streaming and asynchronous job pipelines.  \n\nHis portfolio includes projects such as **Rankr** (AI exam‑prep platform) and **LegalHawk** (contract analysis system), illustrating these capabilities.",
+      "status_code": 200,
+      "response_time_seconds": 19.369,
+      "error": null
+    },
+    {
+      "question": "What could Kasturi build as a freelancer?",
+      "response": "Kasturi can build a range of freelance projects that leverage his expertise in modern full‑stack and AI‑powered development:\n\n- **Full‑stack web applications** using React/Next.js/TypeScript on the front end and Node.js/Express/Fastify with PostgreSQL, MongoDB, or Prisma on the back end.  \n- **AI‑powered applications** that integrate LangChain, LangGraph, Google Gemini, or OpenAI, such as chatbots, recommendation engines, or semantic search tools.  \n- **RAG (retrieval‑augmented generation) systems** built with Qdrant or other vector databases, including document ingestion, embedding pipelines, and semantic search.  \n- **Document‑analysis tools** like contract‑review or legal‑tech solutions (e.g., the LegalHawk contract‑analysis system).  \n- **Real‑time analytics and dashboard platforms** similar to Rankr, featuring role‑based dashboards, real‑time charts, and AI‑driven workflows.  \n\nAll of these fall within the technologies and project types he has documented experience with.",
+      "status_code": 200,
+      "response_time_seconds": 15.324,
+      "error": null
+    },
+    {
+      "question": "What kind of AI applications can Kasturi build?",
+      "response": "Kasturi can build AI‑powered applications such as contract‑analysis tools, real‑time AI chat systems, and RAG‑based knowledge bases that use embeddings and vector search. His work on LegalHawk and AskRepo shows he can create systems that ingest documents, perform semantic search, and provide interactive Q&A powered by LLMs, LangChain, and cloud‑based vector databases.",
+      "status_code": 200,
+      "response_time_seconds": 17.659,
+      "error": null
+    },
+    {
+      "question": "What kind of SaaS applications can Kasturi build?",
+      "response": "Kasturi can build SaaS products that combine a modern full‑stack stack with AI and real‑time features. Typical examples include:\n\n- **AI‑powered learning or exam‑prep platforms** with role‑based dashboards, real‑time analytics, and chat‑based study assistants (e.g., the Rankr platform he built at VascoTech).  \n- **Contract‑analysis or document‑review SaaS** that ingests PDFs, runs semantic search, and answers questions (e.g., LegalHawk).  \n- **Knowledge‑base or repository‑to‑Q&A SaaS** that turns GitHub repositories into searchable, interactive knowledge bases using RAG and vector search (e.g., AskRepo).  \n\nIn each case Kasturi uses React/Next.js for the front end, Node.js/Express or Fastify for the back end, Prisma/PostgreSQL or MongoDB for data, and LangChain, LangGraph, Google Gemini, OpenAI, and Qdrant for the AI and RAG components. These products all share the SaaS model of multi‑tenant, role‑based access, API‑driven architecture, and cloud‑deployed services.",
+      "status_code": 200,
+      "response_time_seconds": 6.499,
+      "error": null
+    },
+    {
+      "question": "Can Kasturi build a RAG application?",
+      "response": "Yes. Kasturi has built RAG‑based applications such as AskRepo and LegalHawk, and he has implemented RAG pipelines in his work on Rankr.",
+      "status_code": 200,
+      "response_time_seconds": 17.973,
+      "error": null
+    },
+    {
+      "question": "Can Kasturi build a document analysis application?",
+      "response": "Yes. Kasturi has built an AI‑powered contract analysis system that ingests documents, performs semantic search and supports interactive Q&A.",
+      "status_code": 200,
+      "response_time_seconds": 17.278,
+      "error": null
+    },
+    {
+      "question": "Is Kasturi available for freelance work?",
+      "response": "Yes, Kasturi is available for freelance software development work.",
+      "status_code": 200,
+      "response_time_seconds": 16.665,
+      "error": null
+    },
+    {
+      "question": "Is Kasturi currently accepting freelance projects?",
+      "response": "Yes, Kasturi is currently available for freelance software development work.",
+      "status_code": 200,
+      "response_time_seconds": 4.864,
+      "error": null
+    },
+    {
+      "question": "What kind of freelance work does Kasturi do?",
+      "response": "Kasturi does freelance software development work, focusing on building full‑stack web applications with React, Next.js, TypeScript, Node.js and Python. He also develops AI/LLM applications, including RAG pipelines and agentic workflows, using tools like LangChain, LangGraph, and vector databases.",
+      "status_code": 200,
+      "response_time_seconds": 8.366,
+      "error": null
+    },
+    {
+      "question": "What technologies can Kasturi use for freelance work?",
+      "response": "Kasturi can work with the following technologies for freelance projects:\n\n- React, Next.js, TypeScript, Vue\n- Node.js, Express, Fastify\n- Python\n- PostgreSQL, MongoDB, Prisma\n- Supabase, Qdrant\n- LangChain, LangGraph, Google Gemini, OpenAI\n- RAG and agentic workflows\n- TailwindCSS, Shadcn, MUI, Recharts\n- TanStack Router, React Query\n- Uploadthing\n- REST APIs, JWT Auth, RBAC\n- SSE, Inngest\n- Git/GitHub, Agile/Scrum\n\nThese are the technologies explicitly listed in Kasturi’s freelance profile and skill set.",
+      "status_code": 200,
+      "response_time_seconds": 11.425,
+      "error": null
+    },
+    {
+      "question": "What can Kasturi build for a freelance client?",
+      "response": "Kasturi can build full‑stack web applications that combine a modern React/Next.js/TypeScript front‑end with a Node.js/Express or Fastify back‑end.  \nHe can add AI‑powered features such as RAG pipelines, LLM‑based chat or Q&A, and semantic search using LangChain, Qdrant, and OpenAI or Google Gemini.  \nHe can implement real‑time analytics dashboards with Recharts and SSE streaming, and build multi‑role access controls with JWT/RBAC.  \nHe has experience delivering subscription flows, authentication, and billing integrations for SaaS products.  \nHe can also create document‑ingestion and semantic‑search systems, as demonstrated by the LegalHawk contract‑analysis app.  \nAll of this is supported by his work with PostgreSQL, MongoDB, Prisma, Supabase, and production deployment practices.",
+      "status_code": 200,
+      "response_time_seconds": 8.784,
+      "error": null
+    },
+    {
+      "question": "How can I hire Kasturi?",
+      "response": "You can hire Kasturi by reaching out through one of the following channels:\n\n- **Email:** me@krangan.dev  \n- **LinkedIn:** linkedin.com/in/-kasturirangan  \n- **GitHub:** github.com/kr-dev1  \n- **Portfolio:** krangan.dev  \n\nFeel free to contact him via any of these methods to discuss opportunities.",
+      "status_code": 200,
+      "response_time_seconds": 13.482,
+      "error": null
+    },
+    {
+      "question": "How can I contact Kasturi about freelance work?",
+      "response": "You can contact Kasturi about freelance work through the following methods:\n\n- Email: me@krangan.dev  \n- Portfolio website: krangan.dev  \n- LinkedIn: linkedin.com/in/-kasturirangan  \n- GitHub: github.com/kr-dev1",
+      "status_code": 200,
+      "response_time_seconds": 2.793,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked at Google?",
+      "response": "No, there is no documented evidence that Kasturi has worked at Google.",
+      "status_code": 200,
+      "response_time_seconds": 14.085,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked at Microsoft?",
+      "response": "No, there is no documented evidence that Kasturi has worked at Microsoft.",
+      "status_code": 200,
+      "response_time_seconds": 7.717,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked at Amazon?",
+      "response": "No, the available information does not indicate that Kasturi has worked at Amazon.",
+      "status_code": 200,
+      "response_time_seconds": 8.856,
+      "error": null
+    },
+    {
+      "question": "Does Kasturi have experience with Rust?",
+      "response": "Kasturi does not have documented experience with Rust.",
+      "status_code": 200,
+      "response_time_seconds": 4.757,
+      "error": null
+    },
+    {
+      "question": "Does Kasturi have experience with Kubernetes?",
+      "response": "Kasturi does not have documented experience with Kubernetes.",
+      "status_code": 200,
+      "response_time_seconds": 5.325,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked with AWS?",
+      "response": "Kasturi has not documented experience with AWS.",
+      "status_code": 200,
+      "response_time_seconds": 6.798,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi built a mobile app?",
+      "response": "No, there’s no record that Kasturi has built a mobile app.",
+      "status_code": 200,
+      "response_time_seconds": 9.168,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi built an iOS application?",
+      "response": "No, there is no documented evidence that Kasturi has built an iOS application.",
+      "status_code": 200,
+      "response_time_seconds": 20.055,
+      "error": null
+    },
+    {
+      "question": "Has Kasturi worked with Docker?",
+      "response": "I don’t have any record of Kasturi working with Docker.",
+      "status_code": 200,
+      "response_time_seconds": 13.956,
+      "error": null
+    },
+    {
+      "question": "Does Kasturi have a master's degree?",
+      "response": "No, there is no indication that Kasturi holds a master’s degree.",
+      "status_code": 200,
+      "response_time_seconds": 6.916,
+      "error": null
+    },
+    {
+      "question": "What is the capital of France?",
+      "response": "I’m sorry, but I can only help with information related to Kasturi’s professional experience, projects, skills, technologies, employment, education, and overall professional background.",
+      "status_code": 200,
+      "response_time_seconds": 7.414,
+      "error": null
+    },
+    {
+      "question": "Write me a Python script.",
+      "response": "I’m sorry, but I can’t help with that. I’m only able to provide information about Kasturi’s professional experience, projects, skills, technologies, employment, education, and overall background.",
+      "status_code": 200,
+      "response_time_seconds": 2.435,
+      "error": null
+    },
+    {
+      "question": "Explain quantum mechanics.",
+      "response": "I’m sorry, but I can’t help with that. I’m only able to assist with information related to Kasturi’s professional experience, projects, skills, technologies, employment, education, and overall professional background.",
+      "status_code": 200,
+      "response_time_seconds": 8.619,
+      "error": null
+    },
+    {
+      "question": "What is Kasturi's home address?",
+      "response": "I’m sorry, but I don’t have that information.",
+      "status_code": 200,
+      "response_time_seconds": 3.198,
+      "error": null
+    },
+    {
+      "question": "What's the weather today?",
+      "response": "I’m sorry, but I can only help with information about Kasturi’s professional experience, projects, skills, technologies, employment, education, or background. I’m not able to provide weather updates.",
+      "status_code": 200,
+      "response_time_seconds": 7.46,
+      "error": null
+    },
+    {
+      "question": "Who is Elon Musk?",
+      "response": "I’m sorry, but I can only assist with information about Kasturi’s professional experience, projects, skills, technologies, employment, education, and background. If you have any questions related to those topics, I’d be happy to help!",
+      "status_code": 200,
+      "response_time_seconds": 2.881,
+      "error": null
+    },
+    {
+      "question": "Tell me a joke.",
+      "response": "I’m sorry, but I can only help with information related to Kasturi’s professional experience, projects, skills, technologies, employment, education, or background. Let me know if you’d like details on any of those!",
+      "status_code": 200,
+      "response_time_seconds": 2.681,
+      "error": null
+    },
+    {
+      "question": "What is the best programming language?",
+      "response": "I’m sorry, but I can only help with information about Kasturi’s professional experience, projects, skills, technologies, employment, education, and background. If you have any questions related to those topics, I’d be happy to assist!",
+      "status_code": 200,
+      "response_time_seconds": 2.817,
+      "error": null
+    },
+    {
+      "question": "How do I build a RAG application?",
+      "response": "I’m sorry, but I can only help with information about Kasturi’s professional experience, projects, skills, technologies, employment, education, or background. If you have any questions related to those topics, I’d be happy to assist!",
+      "status_code": 200,
+      "response_time_seconds": 3.409,
+      "error": null
+    },
+    {
+      "question": "Can you review my resume?",
+      "response": "I’m sorry, but I can only assist with information about Kasturi’s professional experience, projects, skills, technologies, employment, education, and background. I’m not able to review your resume.",
+      "status_code": 200,
+      "response_time_seconds": 2.923,
+      "error": null
+    },
+    {
+      "question": "Write an email to Kasturi.",
+      "response": "Subject: Inquiry About Potential Freelance Collaboration  \n\nHi Kasturi,\n\nI hope you’re doing well. I’m reaching out because I’m interested in exploring a freelance project that aligns with your expertise in full‑stack web development and AI/LLM applications.\n\nThe project involves building a web platform with a React/Next.js frontend, a Node.js/Fastify backend, and integrating a RAG‑based search feature using LangChain and Qdrant. We’re also looking to incorporate real‑time analytics and a subscription system.\n\nCould we schedule a brief call to discuss the scope, timeline, and your availability? Please let me know a convenient time for you, or feel free to suggest an alternative.\n\nThank you, and I look forward to the possibility of working together.\n\nBest regards,  \n[Your Name]  \n[Your Company / Organization]  \n[Your Email]  \n[Your Phone Number]  ",
+      "status_code": 200,
+      "response_time_seconds": 3.91,
+      "error": null
+    },
+    {
+      "question": "Is Kasturi available for freelance work and what technologies does he use?",
+      "response": "Yes, Kasturi is available for freelance software development work.\n\nHe can work with a wide range of technologies, including:\n\n- React, Next.js, Vue.js, TypeScript, JavaScript  \n- Node.js, Express, Fastify, Python  \n- PostgreSQL, MongoDB, Prisma, Supabase, Qdrant (vector DB)  \n- REST APIs, JWT authentication, RBAC  \n- AI/LLM tools such as LangChain, LangGraph, OpenAI, Google Gemini  \n- Retrieval‑augmented generation (RAG) and agentic workflows  \n- Full‑stack web application stacks (MERN, etc.) and related tooling (TailwindCSS, Shadcn UI, React Query, TanStack Router, Inngest, SSE)  \n\nThese are the technologies he uses for freelance projects.",
+      "status_code": 200,
+      "response_time_seconds": 3.772,
+      "error": null
+    },
+    {
+      "question": "What projects has Kasturi built and what stack did he use?",
+      "response": "Kasturi has built the following projects:\n\n| Project | Stack used |\n|---------|------------|\n| **AskRepo** | Next.js, Supabase, Prisma, LangChain, React Query, Tailwind CSS, Shadcn UI |\n| **LegalHawk** | Next.js, Supabase, Prisma, LangChain, Uploadthing, Tailwind CSS, Shadcn UI |\n| **Rankr** (AI‑powered exam‑preparation platform) | React (TypeScript) SPA, Node.js with Fastify, PostgreSQL via Prisma, JWT authentication & RBAC, Recharts, SSE streaming, LangChain, Google Gemini, OpenAI, Qdrant (vector search) |",
+      "status_code": 200,
+      "response_time_seconds": 18.458,
+      "error": null
+    },
+    {
+      "question": "Can I hire Kasturi to build a RAG application?",
+      "response": "Yes. Kasturi is available for freelance software development and has demonstrated experience building RAG‑based applications such as AskRepo and the AI features in Rankr.",
+      "status_code": 200,
+      "response_time_seconds": 23.349,
+      "error": null
+    },
+    {
+      "question": "Does Kasturi know Python and has he actually used it professionally?",
+      "response": "Yes, Kasturi knows Python and has used it professionally in his full‑stack product engineering work.",
+      "status_code": 200,
+      "response_time_seconds": 6.255,
+      "error": null
+    },
+    {
+      "question": "Is he available for work right now and what kind of projects does he take?",
+      "response": "Yes, Kasturi is currently available for freelance software development work.  \nHe takes projects that involve full‑stack web applications and AI‑powered solutions, including RAG and agentic workflows. Typical technologies he works with are React, Next.js, TypeScript, Node.js, Python, and related stacks such as Express, Fastify, PostgreSQL, MongoDB, Prisma, LangChain, OpenAI/Google Gemini, and others.",
+      "status_code": 200,
+      "response_time_seconds": 3.727,
+      "error": null
+    },
+    {
+      "question": "What has Kasturi built with AI?",
+      "response": "Kasturi has built several AI‑focused applications, including:\n\n- **AskRepo** – a RAG‑based system that turns GitHub repositories into interactive knowledge bases using embeddings and vector search.  \n- **LegalHawk** – an AI‑powered contract analysis tool that ingests documents, performs semantic search, and provides interactive Q&A.  \n- **Rankr** (at VascoTech) – an AI‑powered exam‑preparation platform with real‑time analytics, a streaming AI chat feature, and integrated LangChain, Google Gemini and OpenAI agents.  \n- RAG pipelines with embeddings and vector search over Qdrant that power semantic retrieval in the AI features of his projects.",
+      "status_code": 200,
+      "response_time_seconds": 7.112,
+      "error": null
+    },
+    {
+      "question": "Can Kasturi build something like LegalHawk for me?",
+      "response": "Yes—Kasturi has already built LegalHawk, an AI‑powered contract analysis system with document ingestion, semantic search and interactive Q&A. Based on that experience, he can create a similar solution for you.",
+      "status_code": 200,
+      "response_time_seconds": 18.315,
+      "error": null
+    },
+    {
+      "question": "What's Kasturi's email and GitHub?",
+      "response": "You can reach Kasturi at:\n\n- Email: me@krangan.dev  \n- GitHub: github.com/kr-dev1",
+      "status_code": 200,
+      "response_time_seconds": 3.348,
+      "error": null
+    }
+  ]
+}

@@ -99,7 +99,6 @@ def check_events(start_time: datetime, end_time: datetime):
     )
     if start_time and end_time:
         pending_events_check = get_events_time(start_time, end_time)
-        print(pending_events_check)
         if pending_events_check:
             for event in pending_events_check:
                 pending_events.append({"start_time":event.start_date_time, "end_time": event.end_date_time})

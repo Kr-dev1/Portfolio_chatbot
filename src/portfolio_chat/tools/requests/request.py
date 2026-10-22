@@ -4,7 +4,11 @@ from zoneinfo import ZoneInfo
 from sqlmodel import Session, col, select
 
 from portfolio_chat.tools.db.db import engine, init_db
-from portfolio_chat.tools.requests.model import ApprovalRequests, status
+from portfolio_chat.tools.requests.model import (
+    ApprovalRequests,
+    UpdateRequestResult,
+    status,
+)
 
 
 def create_req(**data) -> ApprovalRequests:
@@ -23,9 +27,8 @@ def create_req(**data) -> ApprovalRequests:
         return request
 
 
-def update_req(req_id: str, approval: status):
-    init_db()
-    if not id or not req_id:
+def update_exisitng_req(req_id: str, approval: status, gcal_id: str | None):
+    if not req_id or not approval:
         raise ValueError("Fields Missing")
 
     with Session(engine) as session:
@@ -36,6 +39,7 @@ def update_req(req_id: str, approval: status):
             raise ValueError(f"Request {req_id} not found")
 
         request.status = approval
+        request.gca_id = gcal_id
 
         session.add(request)
         session.commit()
@@ -48,6 +52,7 @@ def check_db_for_event(
     email: str | None,
     start_time: datetime | None,
 ) -> ApprovalRequests | None:
+    init_db()
     if not email or not start_time:
         raise ValueError("Email and start time is required")
 
@@ -73,6 +78,7 @@ def check_db_for_event(
 
 
 def get_events_email(email: str | None):
+    init_db()
     with Session(engine) as session:
         statement = (
             select(ApprovalRequests)
@@ -90,11 +96,53 @@ def get_events_time(start_time: datetime, end_time: datetime):
         statement = (
             select(ApprovalRequests)
             .where(
-                (ApprovalRequests.start_date_time > start_time),
-                (ApprovalRequests.end_date_time < end_time),
+                (ApprovalRequests.start_date_time < end_time),
+                (ApprovalRequests.end_date_time > start_time),
                 col(ApprovalRequests.status).in_([status.APPROVED, status.PENDING]),
             )
             .order_by(col(ApprovalRequests.start_date_time))
         )
 
         return session.exec(statement).all()
+
+
+def create_update_req(req_id: str) -> UpdateRequestResult:
+    with Session(engine) as session:
+        statement = select(ApprovalRequests).where(ApprovalRequests.req_id == req_id)
+        request = session.exec(statement).first()
+
+        if request and request.status == status.PENDING:
+            request.status = status.DECLINED
+            session.add(request)
+            session.commit()
+            return UpdateRequestResult(event_declined=True, request=None)
+
+        if request and request.status == status.APPROVED:
+            return UpdateRequestResult(event_declined=False, request=request)
+
+        raise ValueError(f"Request {req_id} not found or has an unsupported status")
+
+
+def get_event_status(req_id: str, thread_id: str):
+    with Session(engine) as session:
+        statement = (
+            select(ApprovalRequests)
+            .where(ApprovalRequests.req_id == req_id)
+            .where(ApprovalRequests.thread_id == thread_id)
+            .where(col(ApprovalRequests.status).in_([status.PENDING]))
+        )
+        request = session.exec(statement).first()
+
+        if not request:
+            return {"found_event": False}
+        return {"found_event": True}
+
+
+def get_event_by_req_id(req_id: str):
+    with Session(engine) as session:
+        statement = select(ApprovalRequests).where(ApprovalRequests.req_id == req_id)
+        request = session.exec(statement).first()
+
+        if not request:
+            return None
+        return request
