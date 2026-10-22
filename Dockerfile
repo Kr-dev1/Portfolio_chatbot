@@ -6,7 +6,7 @@ COPY pyproject.toml uv.lock README.md ./
 COPY src ./src
 
 RUN pip install --no-cache-dir uv
-RUN uv sync --frozen --no-dev
+RUN UV_HTTP_TIMEOUT=300 UV_HTTP_RETRIES=10 uv sync --frozen --no-dev
 
 ENV PATH="/app/.venv/bin:$PATH"
 ENV PYTHONUNBUFFERED=1
